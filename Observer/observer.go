@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // 代码参考 https://blog.csdn.net/Jeanphorn/article/details/78784197 表示感谢
 
 import (
@@ -53,8 +51,13 @@ func main() {
 	cs := ConcreteSubject{
 		Observers: make(map[Observer]interface{}),
 	}
-	cs.Attach(&ConcreteObserver{1})
-	cs.Attach(&ConcreteObserver{2})
+	cs1 := ConcreteObserver{1}
+	cs2 := ConcreteObserver{2}
+	cs.Attach(&cs1)
+	cs.Attach(&cs2)
 	event := Event{"hello"}
+	cs.Notify(&event)
+	fmt.Println("remove 2")
+	cs.Detach(&cs2)
 	cs.Notify(&event)
 }

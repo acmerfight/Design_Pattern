@@ -9,6 +9,12 @@ class GirlFriend(object):
         self.language = language
 
 
+class Baby(object):
+
+    def __init__(self, nationality):
+        self.nationality = nationality
+
+
 class AbstractFactory(object):
     """
     Declare an interface for operations that create abstract product
@@ -18,6 +24,10 @@ class AbstractFactory(object):
 
     @abc.abstractmethod
     def create_myLove(self):
+        pass
+
+    @abc.abstractmethod
+    def create_baby(self):
         pass
 
 
@@ -30,6 +40,9 @@ class IndianGirlFriendFactory(AbstractFactory):
     def create_myLove(self):
         return GirlFriend(self.nationality, self.eyesColor, self.language)
 
+    def create_baby(self):
+        return Baby(self.nationality)
+
 
 class KoreanGirlFriendFactory(AbstractFactory):
 
@@ -40,9 +53,14 @@ class KoreanGirlFriendFactory(AbstractFactory):
     def create_myLove(self):
         return GirlFriend(self.nationality, self.eyesColor, self.language)
 
+    def create_baby(self):
+        return Baby(self.nationality)
+
 
 factory = IndianGirlFriendFactory()
 print(factory.create_myLove().eyesColor)
+print(factory.create_baby().nationality)
 factory = KoreanGirlFriendFactory()
 print(factory.create_myLove().eyesColor)
+print(factory.create_baby().nationality)
 
